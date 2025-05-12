@@ -1,4 +1,6 @@
-// ScrollReveal لجميع العناصر التي تحتوي على data-sr
+// ========================
+//    ScrollReveal Init
+// ========================
 ScrollReveal().reveal('[data-sr]', {
   duration: 1000,
   origin: 'bottom',
@@ -19,7 +21,6 @@ const prevBtn = document.getElementById('prev');
 let currentIndex = 0;
 let autoSlideInterval = null;
 
-// عرض شريحة معيّنة
 function showSlide(index) {
   if (!slides.length || !dots.length) return;
 
@@ -28,7 +29,6 @@ function showSlide(index) {
     dots[i].classList.toggle('active', i === index);
   });
 
-  // تحديث شريط التقدم
   if (progressBar) {
     progressBar.style.transition = 'none';
     progressBar.style.width = '0%';
@@ -41,19 +41,23 @@ function showSlide(index) {
   currentIndex = index;
 }
 
-// التنقل بين الشرائح
-const nextSlide = () => showSlide((currentIndex + 1) % slides.length);
-const prevSlide = () => showSlide((currentIndex - 1 + slides.length) % slides.length);
+function nextSlide() {
+  showSlide((currentIndex + 1) % slides.length);
+}
 
-// بدء / إيقاف التحريك التلقائي
-const startAutoSlide = () => {
+function prevSlide() {
+  showSlide((currentIndex - 1 + slides.length) % slides.length);
+}
+
+function startAutoSlide() {
   stopAutoSlide();
   autoSlideInterval = setInterval(nextSlide, 8000);
-};
+}
 
-const stopAutoSlide = () => clearInterval(autoSlideInterval);
+function stopAutoSlide() {
+  clearInterval(autoSlideInterval);
+}
 
-// تأثير بسيط عند الضغط على الزر
 function animateButton(button) {
   if (!button) return;
   button.style.transform = 'scale(1.2)';
@@ -62,21 +66,27 @@ function animateButton(button) {
   }, 200);
 }
 
-// تفعيل أزرار التالي / السابق
-[nextBtn, prevBtn].forEach((btn, isNext) => {
-  if (!btn) return;
-  btn.addEventListener('click', () => {
+if (nextBtn) {
+  nextBtn.addEventListener('click', () => {
     stopAutoSlide();
-    isNext ? nextSlide() : prevSlide();
+    nextSlide();
+    animateButton(nextBtn);
     startAutoSlide();
-    animateButton(btn);
   });
-});
+}
 
-// تفعيل النقط للتنقل المباشر
+if (prevBtn) {
+  prevBtn.addEventListener('click', () => {
+    stopAutoSlide();
+    prevSlide();
+    animateButton(prevBtn);
+    startAutoSlide();
+  });
+}
+
 dots.forEach(dot => {
   dot.addEventListener('click', () => {
-    const index = Number(dot.dataset.index);
+    const index = parseInt(dot.dataset.index);
     if (!isNaN(index)) {
       stopAutoSlide();
       showSlide(index);
@@ -84,7 +94,6 @@ dots.forEach(dot => {
     }
   });
 
-  // تحسين المظهر عند المرور
   dot.addEventListener('mouseenter', () => {
     dot.style.transform = 'scale(1.3)';
   });
@@ -94,8 +103,7 @@ dots.forEach(dot => {
   });
 });
 
-// دعم التنقل بلوحة المفاتيح
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') {
     stopAutoSlide();
     nextSlide();
@@ -107,6 +115,22 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// بدء العرض
+// ========================
+//     NAV TOGGLE MOBILE
+// ========================
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("menuToggle");
+  const navList = document.querySelector(".nav-list");
+
+  if (toggle && navList) {
+    toggle.addEventListener("click", () => {
+      navList.classList.toggle("show");
+    });
+  }
+});
+
+// ========================
+//     Init Start
+// ========================
 showSlide(currentIndex);
 startAutoSlide();

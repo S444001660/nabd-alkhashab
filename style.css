@@ -83,6 +83,36 @@ body {
   width: 100%;
   left: 0;
 }
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+/* فقط يظهر على الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    background-color: var(--highlight);
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    display: none;
+    padding: 20px 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+
+  .nav-list.show {
+    display: flex;
+  }
+}
 
 /* ============================= */
 /*         HERO SECTION         */
@@ -330,7 +360,7 @@ body {
 
   .controls {
     top: unset;
-    bottom: -30px;
+    bottom: 30px;
     transform: none;
   }
 
@@ -647,25 +677,50 @@ footer {
     opacity: 1;
   }
 }
-
 /* ============================= */
 /*        RESPONSIVENESS        */
 /* ============================= */
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--primary-color);
+    padding: 10px 20px;
+  }
+
   .nav-list {
+    display: none;
     flex-direction: column;
     background-color: var(--highlight);
-    position: absolute;
+    position: fixed;
     top: 60px;
+    left: 0;
     right: 0;
-    width: 100%;
-    display: none;
+    width: 100vw;
     z-index: 999;
+    padding: 20px 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   }
 
   .nav-list.show {
     display: flex;
   }
+
+.nav-list li {
+  padding: 0;
+  text-align: right;
+}
+
+.nav-list li a {
+  display: block;
+  padding: 14px 20px;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1em;
+  width: 100%;
+}
 
   .hero-text h1 {
     font-size: 2.2em;
@@ -689,16 +744,16 @@ footer {
     height: 300px;
   }
 
-  .controls button {
-    bottom: -30px;
+  .controls {
     top: unset;
+    bottom: 30px;
     transform: none;
   }
 
-  #prev,
-  #next {
-    right: 60px;
-    left: auto;
+  .controls button {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
   }
 
   .location {

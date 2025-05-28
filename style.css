@@ -186,189 +186,209 @@ body {
 }
 
 /* ============================= */
-/*           SLIDER             */
+/* SLIDER              */
 /* ============================= */
 .slider-box {
-  background: linear-gradient(135deg, var(--light1), var(--secondary-color));
-  padding: 80px 20px;
-  text-align: center;
-  position: relative;
-  overflow-x: hidden;
+    background: linear-gradient(135deg, var(--light1), var(--secondary-color));
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    overflow-x: hidden;
 }
 
 .slider-wrapper {
-  position: relative;
-  max-width: 1400px;
-  margin: auto;
-  background: var(--highlight);
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+    position: relative;
+    max-width: 1400px;
+    margin: auto;
+    background: var(--highlight);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .progress-container {
-  width: 100%;
-  height: 5px;
-  background-color: #e0e0e0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
+    width: 100%;
+    height: 5px;
+    background-color: #e0e0e0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
 }
 
 .progress-bar {
-  height: 5px;
-  width: 0%;
-  background-color: var(--accent-color);
-  transition: width 8s linear;
+    height: 5px;
+    width: 0%;
+    background-color: var(--accent-color);
+    transition: width 8s linear; /* هذا الانتقال سيتوقف ويُعاد تعيينه بالـ JS */
 }
 
 .slides {
-  position: relative;
-  min-height: 600px;
+    position: relative;
+    min-height: 600px; /* يمكن تعديل هذا ليكون مرناً أكثر بناءً على المحتوى */
 }
 
 .slide {
-  position: absolute;
-  width: 100%;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-  box-sizing: border-box;
-  z-index: 0;
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    box-sizing: border-box;
+    z-index: 0;
 }
 
 .slide.active {
-  opacity: 1;
-  z-index: 1;
+    opacity: 1;
+    z-index: 1;
 }
 
 .slide .content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 60px;
-  gap: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 60px;
+    gap: 30px;
 }
 
 .slide .content img {
-  width: 48%;
-  height: auto;
-  max-height: 480px;
-  object-fit: cover;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 48%;
+    height: auto;
+    max-height: 480px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .slide .text {
-  width: 48%;
-  text-align: right;
+    width: 48%;
+    text-align: right;
 }
 
 .slide .text p {
-  font-size: 1.2em;
-  color: #444;
-  line-height: 1.8;
+    font-size: 1.2em;
+    color: #444;
+    line-height: 1.8;
 }
 
-/* Controls */
+/* Controls - Positioning and General Styling for all buttons (Desktop/Default) */
 .controls {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-  transform: translateY(-50%);
-  z-index: 5;
-  pointer-events: none; /* يسمح بضغط الزر فقط */
+    position: absolute;
+    bottom: 30px; /* Position from the bottom */
+    left: 50%; /* Start at 50% from the left */
+    transform: translateX(-50%); /* Pull back by half its width to truly center */
+    display: flex; /* Enable flexbox for internal centering */
+    justify-content: center; /* Center buttons horizontally within controls */
+    align-items: center; /* Center buttons vertically within controls */
+    gap: 15px; /* Spacing between buttons */
+    width: auto; /* Allow width to shrinkwrap content */
+    z-index: 5;
+    padding: 0;
+    max-width: 250px; /* Add a max-width to ensure it doesn't span too wide */
 }
 
 .controls button {
-  pointer-events: all;
-  background-color: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  font-size: 22px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: background 0.3s ease;
+    pointer-events: all;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .controls button:hover {
-  background-color: #8a4f28;
-}
-
-@media (max-width: 768px) {
-  .controls {
-    top: unset;
-    bottom: -30px;
-    transform: none;
-    padding: 0 20px;
-  }
-
-  .controls button {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
+    background-color: #8a4f28;
+    transform: scale(1.1);
 }
 
 /* Dots Navigation */
 .dots {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  gap: 12px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 12px;
 }
 
 .dot {
-  width: 14px;
-  height: 14px;
-  background-color: #ccc;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    width: 14px;
+    height: 14px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .dot.active {
-  background-color: var(--accent-color);
+    background-color: var(--accent-color);
 }
 
-/* ============================= */
-/*         RESPONSIVENESS       */
-/* ============================= */
+.dot:hover {
+    transform: scale(1.2);
+}
+
+
+/* RESPONSIVENESS for Slider Section */
 @media (max-width: 768px) {
-  .slide .content {
-    flex-direction: column;
-    padding: 30px 20px;
-    text-align: center;
-  }
+    .slide .content {
+        flex-direction: column;
+        padding: 30px 20px;
+        text-align: center;
+    }
 
-  .slide .content img,
-  .slide .text {
-    width: 100%;
-  }
+    .slide .content img,
+    .slide .text {
+        width: 100%;
+    }
 
-  .slide .content img {
-    max-height: 300px;
-  }
+    .slide .content img {
+        max-height: 300px;
+    }
 
-  .controls {
-    top: unset;
-    bottom: 30px;
-    transform: none;
-  }
+    /* === UPDATED & CONSOLIDATED CONTROLS FOR MOBILE === */
+    /* This rule explicitly targets the controls for mobile */
+    .controls {
+        /* Important: Ensure position is absolute relative to the slider-wrapper */
+        position: absolute !important;
+        /* Force centering horizontally */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        /* Ensure no conflicting positioning from the right */
+        right: auto !important;
+        /* Reset margins that might be pushing it */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        /* Define width to ensure proper centering if content is too wide */
+        width: 100% !important; /* Allow controls to span full width to reliably center its children */
+        max-width: 100% !important; /* Ensure it doesn't go over 100% */
+        /* Flexbox properties to center its children (the buttons) */
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        /* Adjust spacing and padding for mobile */
+        bottom: 25px !important; /* Slightly higher for mobile */
+        gap: 10px !important; /* Smaller gap */
+        padding: 0 10px !important; /* Add slight horizontal padding if needed, to prevent buttons from touching edges */
+        z-index: 10 !important; /* Ensure it's on top */
+        box-sizing: border-box !important; /* Important for width: 100% with padding */
+    }
 
-  .controls button {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
+    .controls button {
+        width: 40px !important; /* Smaller buttons */
+        height: 40px !important;
+        font-size: 20px !important;
+    }
+}
+
+/* Ensure min-height for slides is appropriate for mobile as well */
+@media (max-width: 576px) {
+    .slides {
+        min-height: 450px; /* Adjust as needed for image/text content */
+    }
 }
 
 /* ============================= */

@@ -198,7 +198,7 @@ body {
 
 .slider-wrapper {
     position: relative;
-    max-width: 1400px;
+    max-width: 1300px;
     margin: auto;
     background: var(--highlight);
     border-radius: 20px;
@@ -225,7 +225,7 @@ body {
 
 .slides {
     position: relative;
-    min-height: 600px; /* يمكن تعديل هذا ليكون مرناً أكثر بناءً على المحتوى */
+    min-height: 650px; /* يمكن تعديل هذا ليكون مرناً أكثر بناءً على المحتوى */
 }
 
 .slide {
@@ -311,7 +311,7 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 30px;
-    gap: 12px;
+    gap: 9px;
 }
 
 .dot {
@@ -346,7 +346,7 @@ body {
     }
 
     .slide .content img {
-        max-height: 300px;
+        max-height: 200px;
     }
 
     /* === UPDATED & CONSOLIDATED CONTROLS FOR MOBILE === */
@@ -370,7 +370,7 @@ body {
         justify-content: center !important;
         align-items: center !important;
         /* Adjust spacing and padding for mobile */
-        bottom: 25px !important; /* Slightly higher for mobile */
+        bottom: 33px !important; /* Slightly higher for mobile */
         gap: 10px !important; /* Smaller gap */
         padding: 0 10px !important; /* Add slight horizontal padding if needed, to prevent buttons from touching edges */
         z-index: 10 !important; /* Ensure it's on top */
@@ -387,7 +387,7 @@ body {
 /* Ensure min-height for slides is appropriate for mobile as well */
 @media (max-width: 576px) {
     .slides {
-        min-height: 450px; /* Adjust as needed for image/text content */
+        min-height: 550px; /* Adjust as needed for image/text content */
     }
 }
 
